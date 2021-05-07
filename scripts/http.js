@@ -49,9 +49,11 @@ module.exports = (robot) => {
     const token = req.params.token
     const message = resolveMessageObject(type, req.body)
 
+    console.log("发送的消息为:" + message)
+
     let data = {
-      msgtype: 'text',
-      text: {
+      msgtype: 'markdown',
+      markdown: {
         content: message
       }
     }
@@ -63,9 +65,7 @@ module.exports = (robot) => {
         res.statusCode=400
         res.json({code: 400, message: resp.data})
 
-
       } else {
-        console.log("发送的消息为:" + message)
         res.json({code: 200, message: resp.data})
 
       }
