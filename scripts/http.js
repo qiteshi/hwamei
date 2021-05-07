@@ -60,12 +60,20 @@ module.exports = (robot) => {
     axios.post(url, data).then((resp) => {
       if (resp.data.errmsg != 'ok') {
         console.log(resp.data.errmsg)
+        res.statusCode=400
+        res.json({code: 400, message: resp.data})
+
+
       } else {
-        console.log(message)
+        console.log("发送的消息为:" + message)
+        res.json({code: 200, message: resp.data})
+
       }
     }).catch((error) => {
       console.log(error)
+      res.statusCode(500)
     })
+
   })
 }
 
